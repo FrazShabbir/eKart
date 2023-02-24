@@ -1,10 +1,14 @@
 <?php
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\frontController;
+Route::get('/',[frontController::class,'index'])->name('homePage');
+
+
 Route::group(['namespace' => 'App\Http\Controllers'], function(){
         Route::post('customerLogin', [App\Http\Controllers\Admin\userController::class, 'customerLogin'])->name('customerLogin');
         Route::get('requirements',['as' => 'requirements', 'uses' => 'frontController@requirements']);
         Route::post('requirements/apply',['as' => 'requirements.apply', 'uses' => 'frontController@requirements_apply']);
-        Route::get('/',['as' => 'homePage', 'uses' => 'frontController@index']);
         Route::get('articles',['as' => 'articles', 'uses' => 'frontController@articles']);
         Route::get('articles/{type}/{id}',['as' => 'article.type', 'uses' => 'frontController@articleByType']);
         Route::get('article/detail/{id}',['as' => 'article.detail', 'uses' => 'frontController@articleDetails']);
